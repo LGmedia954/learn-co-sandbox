@@ -2,6 +2,6 @@ $ bin/irena
 
 #!/usr/bin/env ruby
 
-require './lib/irena_intl'
+require '../lib/irena_intl'
 
 Irena::CLI.new.call

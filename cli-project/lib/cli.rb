@@ -1,42 +1,30 @@
+require 'pry'
+
 class Irena::CLI  #CLI Controller
    
-   def call
+  def call
      puts "Hello! I am IRENA. I promote renewable resources and technologies as the key to a sustainable future and help countries achieve their renewable energy potential."\n\n
      list_choices
-     concierge
+    menu
      close
    end
    
    def list_choices
-     puts "1. Bioenergy"\n
-     puts "2. Geothermal"\n
-     puts "3. Hydropower"\n
-     puts "4. Ocean"\n
-     puts "5. Solar"\n
-     puts "6. Wind"\n
-     puts "7. About IRENA"\n\n
+     @energies = Renewables::Energy.available
+@energies.each.with_index(1) do |option, i|
+puts "#{i}. #{option}"
   end
   
-  def concierge
+  def menu
     input = nil
-    while input != exit
+    while input != "exit"
     puts "Please enter a number 1-7 to learn more, or type EXIT to leave the program."\n\n
-    input - gets.strip.downcase
-    case input
-    when "1"
-      Bioenergy
-    when "2"
-      Geothermal
-    when "3"
-      Hydropower
-    when "4"
-      Ocean
-    when "5"
-      Solar
-    when "6"
-      Wind
-    when "7"
-      About_Irena
+    input = gets.strip.downcase
+
+if input.to_i <= 7 && input.to_i > 0
+puts @energies[input.to_i-1]
+elsif input == "exit"
+close
     else
       puts "Invalid entry. Please try again."
     end
